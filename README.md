@@ -5,7 +5,7 @@
 Library Management System
 ---
 
-## Problem Statement (max 150 words)
+## Problem Statement
 Libraries often rely on manual record keeping or poorly structured systems to manage books and users. This can lead to errors in tracking book availability, issuing records, and managing member information. The goal of this project is to design a modular Library Management System using Java and Object-Oriented Programming principles. The system will allow librarians to manage books and members, track issued and returned books, and maintain organized records of library activities. By applying concepts such as abstraction, inheritance, encapsulation, and exception handling, the project demonstrates how real-world systems can be modeled using object-oriented design. The implementation focuses on clean code structure, maintainability, and logical separation of responsibilities across classes and packages.
 ---
 
