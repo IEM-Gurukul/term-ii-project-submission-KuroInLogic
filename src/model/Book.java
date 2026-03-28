@@ -28,4 +28,8 @@ public class Book {
     public boolean isAvailable() {
         return isAvailable;
     }
+
+    public void setAvailability(boolean availability) {
+    this.isAvailable = availability;
+}
 }

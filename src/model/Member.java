@@ -13,11 +13,11 @@ public class Member extends User {
         return borrowedBooks;
     }
 
-    public void incrementBorrowedBooks() {
+    public void borrowBook() {
         borrowedBooks++;
     }
 
-    public void decrementBorrowedBooks() {
+    public void returnBook() {
         borrowedBooks--;
     }
 }

@@ -29,11 +29,33 @@ public class LibraryService {
         System.out.println("Member registered successfully.");
     }
 
+    public void issueBook(int transactionId, Book book, Member member) {
+
+        if (!book.isAvailable()) {
+            System.out.println("Book is not available for issue.");
+            return;
+        }
+
+        Transaction transaction = new Transaction(transactionId, book, member);
+
+        transactions.add(transaction);
+
+        book.setAvailability(false);
+
+        member.borrowBook();
+
+        System.out.println("Book issued successfully.");
+    }
+
     public List<Book> getBooks() {
         return books;
     }
 
     public List<Member> getMembers() {
         return members;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 }
