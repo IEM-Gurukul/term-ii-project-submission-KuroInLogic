@@ -30,6 +30,7 @@ public class LibraryService {
         System.out.println("Member registered successfully.");
     }
 
+    // ISSUE BOOK
     public void issueBook(int transactionId, Book book, Member member) throws BookNotAvailableException {
 
         if (!book.isAvailable()) {
@@ -47,6 +48,7 @@ public class LibraryService {
         System.out.println("Book issued successfully.");
     }
 
+    // RETURN BOOK
     public void returnBook(int transactionId) {
 
         for (Transaction transaction : transactions) {
@@ -72,6 +74,30 @@ public class LibraryService {
         }
 
         System.out.println("Transaction not found.");
+    }
+
+    // SEARCH BY ID
+    public Book searchBookById(int bookId) {
+
+        for (Book book : books) {
+            if (book.getBookId() == bookId) {
+                return book;
+            }
+        }
+
+        return null;
+    }
+
+    // SEARCH BY TITLE
+    public Book searchBookByTitle(String title) {
+
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+
+        return null;
     }
 
     public List<Book> getBooks() {
