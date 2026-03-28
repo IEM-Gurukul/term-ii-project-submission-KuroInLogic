@@ -58,4 +58,31 @@ public class LibraryService {
     public List<Transaction> getTransactions() {
         return transactions;
     }
+
+    public void returnBook(int transactionId) {
+
+    for (Transaction transaction : transactions) {
+
+        if (transaction.getTransactionId() == transactionId) {
+
+            if (transaction.getReturnDate() != null) {
+                System.out.println("Book already returned.");
+                return;
+            }
+
+            transaction.returnBook();
+
+            Book book = transaction.getBook();
+            book.setAvailability(true);
+
+            Member member = transaction.getMember();
+            member.returnBook();
+
+            System.out.println("Book returned successfully.");
+            return;
+        }
+    }
+
+    System.out.println("Transaction not found.");
+    }
 }
