@@ -3,6 +3,7 @@ package service;
 import model.Book;
 import model.Member;
 import model.Transaction;
+import exception.BookNotAvailableException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,10 @@ public class LibraryService {
         System.out.println("Member registered successfully.");
     }
 
-    public void issueBook(int transactionId, Book book, Member member) {
+    public void issueBook(int transactionId, Book book, Member member) throws BookNotAvailableException {
 
         if (!book.isAvailable()) {
-            System.out.println("Book is not available for issue.");
-            return;
+            throw new BookNotAvailableException("Book is not available for issue.");
         }
 
         Transaction transaction = new Transaction(transactionId, book, member);
@@ -47,6 +47,33 @@ public class LibraryService {
         System.out.println("Book issued successfully.");
     }
 
+    public void returnBook(int transactionId) {
+
+        for (Transaction transaction : transactions) {
+
+            if (transaction.getTransactionId() == transactionId) {
+
+                if (transaction.getReturnDate() != null) {
+                    System.out.println("Book already returned.");
+                    return;
+                }
+
+                transaction.returnBook();
+
+                Book book = transaction.getBook();
+                book.setAvailability(true);
+
+                Member member = transaction.getMember();
+                member.returnBook();
+
+                System.out.println("Book returned successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Transaction not found.");
+    }
+
     public List<Book> getBooks() {
         return books;
     }
@@ -57,32 +84,5 @@ public class LibraryService {
 
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void returnBook(int transactionId) {
-
-    for (Transaction transaction : transactions) {
-
-        if (transaction.getTransactionId() == transactionId) {
-
-            if (transaction.getReturnDate() != null) {
-                System.out.println("Book already returned.");
-                return;
-            }
-
-            transaction.returnBook();
-
-            Book book = transaction.getBook();
-            book.setAvailability(true);
-
-            Member member = transaction.getMember();
-            member.returnBook();
-
-            System.out.println("Book returned successfully.");
-            return;
-        }
-    }
-
-    System.out.println("Transaction not found.");
     }
 }
